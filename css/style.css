@@ -1,7 +1,49 @@
-.row {
-  text-align: center;
+body{
+  background-color: black;
 }
-.choices {
-  display: flex;
-  justify-content: space-between;
+
+p, h1, h2, h3, h4{
+  font-size: 20px;
+  font-family: 'Indie Flower', cursive;
+  margin: 10px;
+}
+
+p, h1{
+  color: white;
+}
+
+h3, h4{
+  color: yellow;
+}
+
+h2, .wins, .losses{
+  color: lightblue;
+  display: inline-block;
+}
+
+img{
+  height: 250px;
+}
+
+.row{
+  text-align:center;
+
+}
+
+.choices{
+  display:flex;
+  justify-content: space-around;
+}
+
+.userChoice{
+  color: lightgreen;
+}
+
+.computerChoice{
+  color: red;
+}
+
+.result{
+  font-size: 15px;
+  font-family: 'Indie Flower', cursive;
 }
