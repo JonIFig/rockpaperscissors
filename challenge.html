@@ -12,7 +12,12 @@
 			<h1>Rock Paper Scissors Lizard Spock</h1>
 			<img src="https://kkirsche.github.io/rockPaperScissorsLizardSpock/img/begin.png"/>
 			<p>
-				In order to play you need to put your choice (rock, paper, scissors, lizard or spock)
+				In order to play you need to put your choice
+				(<span class="rock">rock</span>,
+				<span class="paper">paper</span>,
+				<span class="scissors">scissors</span>,
+				<span class="lizard">lizard</span>
+				or <span class="spock">spock</span>)
 				within the box below and press "Shoot!".
 			</p>
 			<button class="difficulty">Difficulty: Hard</button>
@@ -25,12 +30,12 @@
 
 			<div class="choices" class="row">
 				<div>
-					<h2>Wins: </h2><p class="wins"></p>
+					<h2>Wins: </h2><p class="wins">0</p>
 					<h4>Your Choice</h4>
 					<p class="userChoice"></p>
 				</div>
 				<div>
-					<h2>Losses: </h2><p class="losses"></p>
+					<h2>Losses: </h2><p class="losses">0</p>
 					<h4>Computer Choice</h4>
 					<p class="computerChoice"></p>
 				</div>
@@ -38,9 +43,9 @@
 			<div class="result"></div>
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="js/script.js"></script>
 		<script>
+			choices = ["rock", "paper", "scissors", "lizard", "spock"];
 			elem(".difficulty").addEventListener("click", function () {
 				window.location.href = "index.html";
 			})

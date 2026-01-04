@@ -25,12 +25,12 @@
 
 			<div class="choices" class="row">
 				<div>
-					<h2>Wins: </h2><p class="wins"></p>
+					<h2>Wins: </h2><p class="wins">0</p>
 					<h4>Your Choice</h4>
 					<p class="userChoice"></p>
 				</div>
 				<div>
-					<h2>Losses: </h2><p class="losses"></p>
+					<h2>Losses: </h2><p class="losses">0</p>
 					<h4>Computer Choice</h4>
 					<p class="computerChoice"></p>
 				</div>
@@ -38,9 +38,9 @@
 			<div class="result"></div>
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="js/script.js"></script>
 		<script>
+			choices = ["rock", "paper", "scissors"];
 			elem(".difficulty").addEventListener("click", function () {
 				window.location.href = "challenge.html";
 			});

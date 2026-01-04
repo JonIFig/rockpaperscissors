@@ -47,3 +47,23 @@ img{
   font-size: 15px;
   font-family: 'Indie Flower', cursive;
 }
+
+.rock {
+  color: red;
+}
+
+.paper {
+  color: yellow;
+}
+
+.scissors {
+  color: purple;
+}
+
+.lizard {
+  color: green;
+}
+
+.spock {
+  color: blue;
+}

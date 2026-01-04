@@ -1,10 +1,14 @@
-var imgs = ["Rock.png", "Paper.png", "Lizard.png"];
-var choices = ["rock", "paper", "scissors"];
-var randomNumber = 0;
-var computerChoice = "";
-var playerChoice = "";
-var wins = 0;
-var losses = 0;
+const rules = {
+    rock: ["scissors", "lizard"],
+    paper: ["rock", "spock"],
+    scissors: ["paper", "lizard"],
+    lizard: ["spock", "paper"],
+    spock: ["scissors", "rock"]
+};
+let choices = [];
+let randomNumber = 0;
+let wins = 0;
+let losses = 0;
 
 function elem(str){
     return document.querySelector(str);
@@ -15,79 +19,66 @@ function update(target, val){
 }
 
 function player(choice){
-    var invalid = 0;
-    choices.forEach(function(val, idx){
-        if(choice === choices[idx]){
-            update(".userChoice", choice);
-        } else {
-            invalid++;
-        }
-    });
-    if(invalid === choices.length){
+    if (!choices.includes(choice)) {
         update(".result", `<p style="color: white;">Not valid input!</p>`);
+        update(".userChoice", "");
+        return false;
     }
+
+    update(".userChoice", choice);
+    return true;
 }
 
 function getRandomComputerChoice(){
     randomNumber = Math.floor(Math.random() * choices.length);
-    computerChoice = choices[randomNumber];
+    const computerChoice = choices[randomNumber];
     update(".computerChoice", computerChoice);
+    return computerChoice;
 }
 
-function chooseWinner(){
-    choices.forEach(function(val, idx){
-        if(playerChoice === computerChoice){
-            update(".result", `<p style="color: white;">No one wins!</p>`);
-        } else if(playerChoice === choices[idx]){
-            if(idx === 0){
-                if(computerChoice === "paper"){
-                    update(".result", `<p style="color: red;">Computer Wins!</p>`);
-                    losses++;
-                } else if(computerChoice === "scissors"){
-                    update(".result", `<p style="color: lightgreen;">You Won!</p>`);
-                    wins++;
-                }
-            } else if(idx === 1){
-                if(computerChoice === "rock"){
-                    update(".result", `<p style="color: green;">You Won!</p>`);
-                    wins++;
-                } else if(computerChoice === "scissors"){
-                    update(".result", `<p style="color: red;">Computer Wins!</p>`);
-                    losses++;
-                }
-            } else {
-                if(computerChoice === "paper"){
-                    update(".result", `<p style="color: green;">You Won!</p>`);
-                    wins++;
-                } else if(computerChoice === "rock"){
-                    update(".result", `<p style="color: red;">Computer Wins!</p>`);
-                    losses++;
-                }
-            }
-        }
-    });
+function chooseWinner(playerChoice, computerChoice){
+    if (playerChoice === computerChoice) {
+        update(".result", `<p style="color: white;">No one wins!</p>`);
+        return;
+    }
+
+    if (rules[playerChoice].includes(computerChoice)) {
+        win();
+    } else {
+        lose();
+    }
+
     update(".wins", wins);
     update(".losses", losses);
 }
 
 function play(inpt){
-    player(inpt);
-    getRandomComputerChoice();
-    chooseWinner();
+    if(!player(inpt)) return;
+    chooseWinner(inpt, getRandomComputerChoice());
+}
+
+function win() {
+    update(".result", `<p style="color: lightgreen;">You Won!</p>`);
+    wins++;
+}
+
+function lose() {
+    update(".result", `<p style="color: red;">Computer Wins!</p>`);
+    losses++;
 }
 
 function reset(){
     wins = 0;
     losses = 0;
-    update(".wins", 0);
-    update(".losses", 0);
-    update(".result", "");
-    update(".userChoice", "");
-    update(".computerChoice", "");
+    update(".wins", wins);
+    update(".losses", losses);
+    [".result", ".userChoice", ".computerChoice"].forEach(sel =>
+        update(sel, "")
+    );
 }
 
 elem(".play").addEventListener("click", function(){
-    playerChoice = elem(".input").value.toLowerCase();
+    const playerChoice = elem(".input").value.toLowerCase();
     play(playerChoice);
     elem(".input").value = "";
 });
